@@ -1,0 +1,35 @@
+{
+    "architecture": "MixtralForCausalLM",
+    "num_hidden_layers": 32,
+    "num_attention_heads": 32,
+    "num_key_value_heads": 8,
+    "hidden_size": 4096,
+    "norm_epsilon": 1e-05,
+    "vocab_size": 32000,
+    "max_position_embeddings": 32768,
+    "head_size": 128,
+    "hidden_act": "swiglu",
+    "dtype": "float16",
+    "position_embedding_type": "rope_gpt_neox",
+    "intermediate_size": 14336,
+    "moe_num_experts": 8,
+    "moe_top_k": 2,
+    "rotary_base": 1000000.0,
+    "rope_theta": 1000000.0,
+    "mapping": {
+        "world_size": 1,
+        "tp_size": 1,
+        "pp_size": 1
+    },
+    "quantization": {
+        "quant_algo": "FP8",
+        "kv_cache_quant_algo": "FP8"
+    },
+    "kv_dtype": "float16"
+}
+
+
+// $tp_size $max_num_tokens $max_batch_size ISL/OSL
+// 2 3072 2048 General
+
+// 4 8192 8192 General
