@@ -1,23 +1,17 @@
 docker run --rm --ipc=host --runtime=nvidia --gpus all --entrypoint /bin/bash -it nvidia/cuda:12.4.1-devel-ubuntu22.04
-docker run --rm --ipc=host --runtime=nvidia --gpus all --entrypoint /bin/bash -it nvcr.io/nvidia/tritonserver:24.07-trtllm-python-py3
+docker run  --rm --ipc=host --runtime=nvidia --gpus all --entrypoint /bin/bash -v /home/$USER/code/Mistral-7B-Instruct-v0.2:/opt/tritonserver/Mistral-7B-Instruct-v0.2:ro -it nvcr.io/nvidia/tritonserver:24.07-trtllm-python-py3 
 
 # ref
 # https://github.com/triton-inference-server/tensorrtllm_backend?tab=readme-ov-file
 
-docker cp ~/code/Mistral-7B-Instruct-v0.2 cbf3491ef577:/opt/tritonserver/code/
+docker cp ~/code/Mistral-7B-Instruct-v0.2 d246449a4cb7:/opt/tritonserver/code/
 
 #  check installation 
 python3 -c "import tensorrt_llm"
 
-cd code
-
-git clone https://github.com/NVIDIA/TensorRT-LLM.git
 
 git clone --depth 1 --branch v0.11.0 https://github.com/NVIDIA/TensorRT-LLM.git
-# pip install -r TensorRT-LLM/examples/llama/requirements.txt 
-# pip install --upgrade protobuf
-
-hf_weights_dir="Mistral-7B-Instruct-v0.2"
+hf_weights_dir="/opt/tritonserver/Mistral-7B-Instruct-v0.2"
 hf_converted_weights="converted_weights/Mistral-7B-Instruct-v0.2"
 trt_engine_1gpu="trt-engines/mistral/fp16/1-gpu"
 
